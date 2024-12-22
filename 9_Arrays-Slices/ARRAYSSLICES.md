@@ -28,3 +28,17 @@ um slice, o array vai ficar inalterado e vou pegar um pedaço dele e salvar dent
 essa sintaxe o primeiro índice é incluso e segundo é exclusivo, ou seja, ele não vai pegar o item que esteja nesse índice
 que foi passado pegando o valor anterior a ele.
 * Então, nesse caso criamos um slice (fatia) a partir de um array que já existia, esse cara aqui é como se fosse um ponteiro apontando para essas posições do array.
+
+## Arrays Internos
+* A função make vai alocar um espaço na memória para uma determinada coisa do nosso programa, então pode ser para um slice como vai ser o nosso caso, você pode criar
+outras estruturas no Go também usando a função make como alternativa.
+* A função make recebe três parâmetros: o primeiro deles vai ser o tipo do slice que queremos criar, o segundo parâmetro vai ter o tamanho do nosso slice que é a quantidade
+de itens que ele tem, e o terceiro parâmetro é a capacidade que é a quantidade máxima de itens que ele pode ter.
+* Quando você cria um slice ele está sempre apontando para um array daí vem o nome slice que é uma fatia de um array, o que acontece é que essa função make ela vai criar um
+array de 15 posições e ela vai retornar pra gente um slice que vai pegar as 10 primeiras posições desse array, então quando você usa um slice, quando você cria ele sem fazer
+uma referência direta a um array ele vai referenciar o que a gente chama de array interno.
+* Nesse caso, a função make criou um array pra gente de 15 posições, por isso capacidade, e retornou pra gente um slice de 10 posições que vai referenciar as 10 primeiras posições
+desse array.
+* O Go quando ele vê que o seu slice vai estourar o tamanho ele cria um outro array pra você referenciar e dobra o tamanho dele e é por isso que o slice nunca tem um tamanho limite
+ele tem a capacidade máxima dele inicialmente, só que sempre que você passar essa capacidade ele vai te dar mais, então ele nunca vai deixar que você fique sem espaço.
+* Basicamente quando você não passa o último parâmetro aqui no make ele vai definir que a capacidade do slice é igual ao tamanho dele.
