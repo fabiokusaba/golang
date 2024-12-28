@@ -19,18 +19,26 @@ func Gerar() *cli.App {
 	app.Name = "Aplicação de Linha de Comando"
 	app.Usage = "Busca IPs e Nomes de Servidor na Internet"
 
+	flags := []cli.Flag{
+		cli.StringFlag{
+			Name:  "host",
+			Value: "devbook.com.br",
+		},
+	}
+
 	// Comandos da aplicação
 	app.Commands = []cli.Command{
 		{
-			Name:  "ip",
-			Usage: "Busca de IPs de endereços na Internet",
-			Flags: []cli.Flag{
-				cli.StringFlag{
-					Name:  "host",
-					Value: "devbook.com.br",
-				},
-			},
+			Name:   "ip",
+			Usage:  "Busca de IPs de endereços na Internet",
+			Flags:  flags,
 			Action: buscarIps,
+		},
+		{
+			Name:   "servidores",
+			Usage:  "Busca o nome dos Servidores na Internet",
+			Flags:  flags,
+			Action: buscarServidores,
 		},
 	}
 
@@ -50,5 +58,19 @@ func buscarIps(c *cli.Context) {
 	// Como nossa variável ips é um slice eu posso estar iterando sobre ela
 	for _, ip := range ips {
 		fmt.Println(ip)
+	}
+}
+
+func buscarServidores(c *cli.Context) {
+	host := c.String("host")
+
+	// Name server -> nome do servidor
+	servidores, err := net.LookupNS(host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, servidor := range servidores {
+		fmt.Println(servidor.Host)
 	}
 }
