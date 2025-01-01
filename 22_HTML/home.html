@@ -23,5 +23,17 @@
     <marquee behavior="" direction="">
         <h4>Seja bem vindo, {{.Nome}}!</h4>
     </marquee>
+
+    <button id="botao">Clique em mim!</button>
+
+    <script>
+        // Criando uma variável para armazenar o nosso botão e quando esse botão for clicado vou chamar uma função para ser executada
+        var botao = document.getElementById('botao');
+
+        // Atrelando uma função ao nosso botao
+        botao.onclick = function() {
+            alert('Você clicou em mim!');
+        }
+    </script>
 </body>
 </html>
